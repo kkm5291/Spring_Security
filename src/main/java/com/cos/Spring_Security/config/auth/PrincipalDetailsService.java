@@ -1,7 +1,7 @@
-package com.cos.login_security.config.auth;
+package com.cos.Spring_Security.config.auth;
 
-import com.cos.login_security.model.User;
-import com.cos.login_security.repository.UserRepository;
+import com.cos.Spring_Security.model.User;
+import com.cos.Spring_Security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

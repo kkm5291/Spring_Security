@@ -1,4 +1,4 @@
-package com.cos.login_security.config;
+package com.cos.Spring_Security.config;
 
 import org.springframework.boot.web.servlet.view.MustacheViewResolver;
 import org.springframework.context.annotation.Configuration;

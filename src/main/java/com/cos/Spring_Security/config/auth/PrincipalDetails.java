@@ -1,4 +1,4 @@
-package com.cos.login_security.config.auth;
+package com.cos.Spring_Security.config.auth;
 
 // 시큐리티가 /login 주소 요청이 오면 낚아채서 로그인을 진행시킨다.
 // 로그인을 진행이 완료가 되면 시큐리티 session을 만들어준다. (Security ContextHolder) 이곳에 키값을 저장함
@@ -8,7 +8,7 @@ package com.cos.login_security.config.auth;
 
 // Security Session => Authentication => UserDetails(PrincipalDetails) 타입이여야 함
 
-import com.cos.login_security.model.User;
+import com.cos.Spring_Security.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

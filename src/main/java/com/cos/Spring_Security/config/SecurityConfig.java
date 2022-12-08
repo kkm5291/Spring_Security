@@ -1,4 +1,4 @@
-package com.cos.login_security.config;
+package com.cos.Spring_Security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

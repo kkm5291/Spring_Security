@@ -1,4 +1,4 @@
-package com.cos.login_security;
+package com.cos.Spring_Security;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

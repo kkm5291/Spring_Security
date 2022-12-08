@@ -1,13 +1,13 @@
-package com.cos.login_security;
+package com.cos.Spring_Security;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LoginSecurityApplication {
+public class SpringSecurityApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(LoginSecurityApplication.class, args);
+        SpringApplication.run(SpringSecurityApplication.class, args);
     }
 
 }

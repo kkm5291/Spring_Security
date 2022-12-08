@@ -1,4 +1,4 @@
-package com.cos.login_security.model;
+package com.cos.Spring_Security.model;
 
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;

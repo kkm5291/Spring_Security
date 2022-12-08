@@ -1,6 +1,6 @@
-package com.cos.login_security.repository;
+package com.cos.Spring_Security.repository;
 
-import com.cos.login_security.model.User;
+import com.cos.Spring_Security.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 // CRUD 함수를 JpaRepository가 들고 있음.

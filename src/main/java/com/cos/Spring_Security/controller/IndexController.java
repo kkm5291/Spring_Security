@@ -1,8 +1,8 @@
-package com.cos.login_security.controller;
+package com.cos.Spring_Security.controller;
 
 
-import com.cos.login_security.model.User;
-import com.cos.login_security.repository.UserRepository;
+import com.cos.Spring_Security.model.User;
+import com.cos.Spring_Security.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
