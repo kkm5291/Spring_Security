@@ -4,12 +4,12 @@ package com.cos.Spring_Security.controller;
 import com.cos.Spring_Security.config.auth.PrincipalDetails;
 import com.cos.Spring_Security.model.User;
 import com.cos.Spring_Security.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
@@ -18,13 +18,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller // View를 리턴하겠다
+@RequiredArgsConstructor
 public class IndexController {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
-    @Autowired
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/test/login")
     public @ResponseBody String testLogin(Authentication authentication,
@@ -58,8 +57,12 @@ public class IndexController {
         return "index";
     }
 
+    // OAuth 로그인을 해도 PrincipalDetails
+    // 일반 로그인도 PrincipalDetails
+    // 위에 코드처럼 코드를 각각으로 분개할 필요가 없어짐
     @GetMapping("/user")
     public @ResponseBody String user(@AuthenticationPrincipal PrincipalDetails principalDetails) {
+        System.out.println("principaDetails : " + principalDetails.getUser());
         return "user";
     }
 
