@@ -30,6 +30,8 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     //OAuth 로그인 생성자
+    // OAuth에서 받아온 attributes를 토대로 user객체를 채워줄 것임
+    // 즉, OAuth용 생성자
     public PrincipalDetails(User user, Map<String, Object> attributes) {
         this.user = user;
         this.attributes = attributes;

@@ -2,13 +2,11 @@ package com.cos.Spring_Security.config;
 
 import com.cos.Spring_Security.config.oauth.PrincipalOauth2UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -43,8 +41,8 @@ public class SecurityConfig {
                 .and()
                 .oauth2Login()
                 .loginPage("/loginForm") // 구글 로그인이 완료된 뒤의 후처리가 필요함.
-                .userInfoEndpoint()
-                .userService(principalOauth2UserService);
+                .userInfoEndpoint() // oauth2Login 성공 이후의 설정을 시작하겠다
+                .userService(principalOauth2UserService); // principalOauth2UserService에서 처리하겠다
 
         return http.build();
     }

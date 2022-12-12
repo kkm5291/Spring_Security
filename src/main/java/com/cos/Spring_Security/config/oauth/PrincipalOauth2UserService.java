@@ -1,6 +1,10 @@
 package com.cos.Spring_Security.config.oauth;
 
 import com.cos.Spring_Security.config.auth.PrincipalDetails;
+import com.cos.Spring_Security.config.oauth.provider.FacebookUserInfo;
+import com.cos.Spring_Security.config.oauth.provider.GoogleUserInfo;
+import com.cos.Spring_Security.config.oauth.provider.NaverUserInfo;
+import com.cos.Spring_Security.config.oauth.provider.OAuth2UserInfo;
 import com.cos.Spring_Security.model.User;
 import com.cos.Spring_Security.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,6 +14,8 @@ import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
+
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -26,7 +32,6 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         System.out.println("getAccessToken : " + userRequest.getAccessToken());
-        System.out.println("getAdditionalParameters : " + userRequest.getAdditionalParameters());
         System.out.println("getClientRegistration : " + userRequest.getClientRegistration()); // registrationId로 어떤 OAuth로 로그인 했는지 확인 가능
 
 
@@ -38,11 +43,24 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
 
 
         //회원가입 강제로 진행시키기
-        String provider = userRequest.getClientRegistration().getClientId(); // google
-        String providerId = oAuth2User.getAttribute("sub"); // google의 provider Id
+        OAuth2UserInfo oAuth2UserInfo = null;
+
+        if (userRequest.getClientRegistration().getRegistrationId().equals("google")) {
+            System.out.println("구글 로그인 요청");
+            oAuth2UserInfo = new GoogleUserInfo(oAuth2User.getAttributes());
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("facebook")) {
+            System.out.println("페이스북 로그인 요청");
+            oAuth2UserInfo = new FacebookUserInfo(oAuth2User.getAttributes());
+        } else if (userRequest.getClientRegistration().getRegistrationId().equals("naver")) {
+            System.out.println("네이버 로그인 요청");
+            oAuth2UserInfo = new NaverUserInfo((Map) oAuth2User.getAttributes().get("response"));
+        }
+
+        String provider = oAuth2UserInfo.getProvider();
+        String providerId = oAuth2UserInfo.getProviderId();
         String username = provider + "_" + providerId; // google_sub가 될것임 (유저네임 충돌되지 않음)
         String password = bCryptPasswordEncoder.encode("겟인데어");
-        String email = oAuth2User.getAttribute("email");
+        String email = oAuth2UserInfo.getEmail();
         String role = "ROLE_USER";
 
         User userEntity = userRepository.findByUsername(username);
@@ -57,6 +75,8 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .providerId(providerId)
                     .build();
             userRepository.save(userEntity);
+        } else {
+            System.out.println("이미 회원가입이 되어 있습니다.");
         }
 
         return new PrincipalDetails(userEntity, oAuth2User.getAttributes());

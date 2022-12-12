@@ -13,6 +13,11 @@
     <button>로그인</button>
 </form>
 <a href="oauth2/authorization/google">구글 로그인</a>
+<a href="oauth2/authorization/facebook">페이스북 로그인</a>
+<a href="oauth2/authorization/naver">네이버 로그인</a> <!-- 네이버는 OAuth 라이브러리에 적용되지 않음
+그럼에도 사용이 가능한 이유는 application.properties 파일에 적용했기 때문인데
+링크는 oauth2/authorization/sns 규칙을 따라야 하기 때문에 해당 링크를 클릭할 경우
+application.properties에서 authorization-uri링크로 실행이 됨 -->
 <a href="/joinForm">회원가입을 아직 하지 않았습니다.</a>
 </body>
 </html>
